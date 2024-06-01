@@ -1,0 +1,22 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viva-backend
+  labels:
+    app: viva-backend
+spec:
+  selector:
+    matchLabels:
+      app: viva-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: viva-backend
+    spec:
+      containers:
+        - name: viva-backend
+          image: cr.selcloud.ru/viva/viva_backend
+          ports:
+            - containerPort: 8000
