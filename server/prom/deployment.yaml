@@ -1,1 +1,35 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viva-prometheus
+  labels:
+    app: viva-prometheus
 
+spec:
+  selector:
+    matchLabels:
+      app: viva-prometheus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: viva-prometheus
+    spec:
+      containers:
+        - name: viva-prometheus
+          image: dockerhub.timeweb.cloud/prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yaml"
+            - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+            - "--web.console.templates=/usr/share/prometheus/consoles"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: viva-prometheus-volume
+              mountPath: /etc/prometheus/prometheus.yaml
+              subPath: prometheus.yaml
+      volumes:
+        - name: viva-prometheus-volume
+          configMap:
+            name: config-prom

@@ -2,14 +2,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nuxt-ingress
+  name: viva-backend-ingress
+  namespace: default
 spec:
-  ingressClassName: nginx
   rules:
-    - host: vivairlines.easylife48.ru
+    - host: 185.187.91.14.nip.io
       http:
         paths:
-          - path: "/"
+          - path: /api/*
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 80
+          - path: /
             pathType: Prefix
             backend:
               service:

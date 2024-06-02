@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nuxt
-          image: cr.selcloud.ru/viva/viva:latest
+          image: cr.selcloud.ru/viva/viva_front:latest
           ports:
             - containerPort: 3000
               name: nuxt-port

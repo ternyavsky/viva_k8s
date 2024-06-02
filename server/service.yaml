@@ -6,7 +6,6 @@ spec:
   selector:
     app: viva_backend
   ports:
-    - port: 8001
-      protocol: TCP
-      targetPort: 8000
-  type: LoadBalancer
+    - port: 80
+  type: ExternalName
+  externalName: 185.187.90.294
